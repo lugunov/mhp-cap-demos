@@ -1,6 +1,6 @@
-namespace com.mhp.talk; 
+namespace com.mhp.demo.chat; 
 
-using {Country,managed} from '@sap/cds/common'; 
+using {managed} from '@sap/cds/common'; 
 
 // onboarded Uses with personal info and technical info about connection to client
  entity Users: managed {
@@ -22,6 +22,7 @@ entity Clients: managed {
         clientHost  : String; 
         clientPaired: Boolean;
         maxDeliveryAttempts: Integer;
+        interval: Integer;
 }
 
 // this entity contains messages which are send from Client A to Client B
