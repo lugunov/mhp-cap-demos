@@ -1,0 +1,2 @@
+clientID;userID;clientHost;clientPaired;maxDeliveryAttempts;interval
+1;S0000000001;spiederman666;true;5;60

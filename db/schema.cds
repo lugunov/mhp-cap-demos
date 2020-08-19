@@ -4,21 +4,21 @@ using {managed} from '@sap/cds/common';
 
 // onboarded Uses with personal info and technical info about connection to client
  entity Users: managed {
-        key ID        : UUID;
+        key ID        : Integer;
             nickname  : String not null;
-            userId : String not null;
+            userID    : String not null;
             firstname : String;
             lastname  : String;
             email     : String;
             division  : String; 
-            client    : Association to many Clients on userId = userId; 
+            client    : Association to many Clients on userID = userID; 
             isActive  : Boolean;
 }
 //one onboarded user can have multiple connected clients 
 
 entity Clients: managed {
-    key clientId: UUID; 
-        userId: String; 
+    key clientID: Integer; 
+        userID: String; 
         clientHost  : String; 
         clientPaired: Boolean;
         maxDeliveryAttempts: Integer;
@@ -28,8 +28,8 @@ entity Clients: managed {
 // this entity contains messages which are send from Client A to Client B
 entity MessageQueue: managed { 
     key messageID: UUID; 
-        senderClientId: String;
-        reciepentClientId: String;
+        senderClientId: Integer;
+        reciepentClientId: Integer;
         messageText: String; 
         createdOn: DateTime; 
         deliveryAttempts: Integer; 
@@ -41,8 +41,8 @@ entity MessageQueue: managed {
 // test of message is not saved
 entity MessageLog: managed {
     key messageID: UUID;
-        senderClientId: String;
-        reciepentClientId: String;
+        senderClientId: Integer;
+        reciepentClientId: Integer;
         status: String;
         createdOn: DateTime; 
         deliveryAttempts: Integer; 
