@@ -23,28 +23,22 @@ entity Clients: managed {
         clientPaired: Boolean;
         maxDeliveryAttempts: Integer;
         interval: Integer;
-}
-
-// this entity contains messages which are send from Client A to Client B
-entity MessageQueue: managed { 
-    key messageID: UUID; 
-        senderClientId: Integer;
-        reciepentClientId: Integer;
-        messageText: String; 
-        createdOn: DateTime; 
-        deliveryAttempts: Integer; 
-        scheduled: Boolean;
-        scheduleDateTime: DateTime
+        sentMessages: Association to many MessageLog on sentMessages.senderClientId = clientID; 
+        recievedMessages: Association to many MessageLog on recievedMessages.reciepentClientId = clientID;
 
 }
-// After message was sent to client or failed, put header of message in log
-// test of message is not saved
+
+// This entity contains messages which has to be sent to client
+// The status can be "SENT"; "FAILED"; 
 entity MessageLog: managed {
     key messageID: UUID;
         senderClientId: Integer;
         reciepentClientId: Integer;
+        messageText: String; 
         status: String;
         createdOn: DateTime; 
         deliveryAttempts: Integer; 
-        lastAttemptOn: DateTime
+        lastAttemptOn: DateTime;
+        scheduled: Boolean;
+        scheduleDateTime: DateTime;
 }
